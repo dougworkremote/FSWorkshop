@@ -1,0 +1,5 @@
+java-lms/.gradle
+java-lms/build/
+django_lms/django_lms/__pycache__/
+django_lms/lms_env/
+django_lms/django_lms/settings.py
