@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head></head>
+<body>
+<h1>{{ category.name }}</h1>
+<ul>Courses:
+{% for course in courses %}
+{% url 'course' course.id as course_link %}
+<li><a href="{{ course_link }}">{{ course.name }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>
+

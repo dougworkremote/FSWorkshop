@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head></head>
+<body>
+<h1>{{ course.name }}</h1>
+<h3>
+{% url 'category' course.category.id as category_link %}
+<a href="{{ category_link }}">{{ course.category.name }}</a>
+</h3>
+<p>{{ course.summary }}</p>
+<p>
+Start Date: {{ course.start_date }}<br/>
+End Date: {{ course.expiration_date }}
+</p>
+<ul>What's inside:
+{% for content in course_content %}
+   <li>{{ content.name }}</li>
+{% endfor %}
+</ul>
+</body>
+</html>

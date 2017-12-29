@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head></head>
+<body>
+<h1>LMS Categories</h1>
+<ul>
+{% for category in categories %}
+{% url 'category' category.id as category_link %}
+<li><a href="{{ category_link }}">{{ category.name }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>
