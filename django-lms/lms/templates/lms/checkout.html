@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Checkout</h1>
+    <form action="{% url 'charge' %}" method="post">
+        <article>
+            <label>
+                <span>Total charge amount is ${{ cart.cart_total }}</span>
+            </label>
+        </article>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}" data-description="{{ charge_description }}" data-amount="{{ cart.cart_total }}" data-locale="auto" data-zip-code="true"></script>
+    </form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <p>{{ product.name }} added to cart!</p>
+    {% endif %}
+{% endblock %}

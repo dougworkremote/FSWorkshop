@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>${{ product.price }}</p>
+<a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+<p>{{ product.description }}</p>
+<ul>Courses contained within this product:
+{% for course in courses %}
+    <li><a href="{% url 'course' course.id %}">{{ course.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

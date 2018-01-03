@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ enrollment.course.name }}{% endblock %}
+{% block content %}
+<h1>Enrollment: {{ enrollment.course.name }}</h1>
+<p>Date Registered: {{ enrollment.date_registered }}</p>
+<ul>Enrollment Content:
+    {% for content in course_contents %}
+    <li>
+        <h3>{{ content.name }}</h3>
+        <p>{{ content.content }}</p>
+        {% if content.additional_resource_link %}
+            <p><a href="{{ content.additional_resource_link }}">More Info</a></p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<ul>Course Comments From Other Students:
+    {% for comment in enrollment.course.comments %}
+        {% if comment.approved %}
+            <li>
+                <p>By: {{ comment.user.username }}</p>
+                <p>{{ comment.content }}</p>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<form method="post" action="">
+    <textarea name="content"></textarea>
+    <input type="hidden" name="parent" value="" />
+    <button type="submit">Submit Comment</button>
+</form>
+{% endblock %}

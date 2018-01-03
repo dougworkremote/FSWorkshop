@@ -1,13 +1,11 @@
-<!doctype html>
-<html>
-<head></head>
-<body>
+{% extends "base.html" %}
+{% block title %}LMS Courses{% endblock %}
+{% block content %}
 <h1>LMS Courses</h1>
 <ul>
-{% for course in courses %}
-{% url 'course' course.id as course_link %}
-<li><a href="{{ course_link }}">{{ course.name }}</a></li>
-{% endfor %}
+    {% for course in courses %}
+        {% url 'course' course.id as course_link %}
+        <li><a href="{{ course_link }}">{{ course.name }}</a></li>
+    {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock %}

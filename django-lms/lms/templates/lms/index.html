@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head></head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>Welcome to our LMS!</h1>
 <p>Would you like to look at?</p>
 <ul>
-<li><a href="{% url 'categories' %}">Categories</a></li>
-<li><a href="{% url 'courses' %}">Courses</a></li>
+    <li><a href="{% url 'categories' %}">Categories</a></li>
+    <li><a href="{% url 'courses' %}">Courses</a></li>
+    <li><a href="{% url 'products' %}">Products</a></li>
 </ul>
-</body>
-</html>
+
+{% endblock %}

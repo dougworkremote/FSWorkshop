@@ -1,21 +1,23 @@
-<!doctype html>
-<html>
-<head></head>
-<body>
+{% extends "base.html" %}
+{% block title %}{{ course.name }}{% endblock %}
+{% block content %}
 <h1>{{ course.name }}</h1>
 <h3>
-{% url 'category' course.category.id as category_link %}
-<a href="{{ category_link }}">{{ course.category.name }}</a>
+    {% url 'category' course.category.id as category_link %}
+    <a href="{{ category_link }}">{{ course.category.name }}</a>
 </h3>
 <p>{{ course.summary }}</p>
-<p>
-Start Date: {{ course.start_date }}<br/>
+<p>Start Date: {{ course.start_date }}<br/>
 End Date: {{ course.expiration_date }}
 </p>
-<ul>What's inside:
-{% for content in course_content %}
-   <li>{{ content.name }}</li>
-{% endfor %}
+<ul>What's inside this course:
+    {% for content in course_content %}
+        <li>{{ content.name }}</li>
+    {% endfor %}
 </ul>
-</body>
-</html>
+<ul>Products that contain this course:
+    {% for product in products %}
+        <li><a href="{% url 'product' product.id %}">{{ product.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

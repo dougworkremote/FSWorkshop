@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}LMS Products{% endblock %}
+{% block content %}
+<h1>Products</h1>
+<ul>
+{% for product in products %}
+    <li><a href="{% url 'product' product.id %}">{{ product.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

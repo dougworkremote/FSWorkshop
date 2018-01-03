@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Your Enrollments{% endblock %}
+{% block content %}
+<h1>Your Enrollments</h1>
+<ul>
+{% for enrollment in enrollments %}
+    <li><a href="{% url 'enrollment' enrollment.id %}">{{ enrollment.course.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
