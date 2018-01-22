@@ -1,32 +1,73 @@
 {% extends "base.html" %}
 {% block title %}{{ enrollment.course.name }}{% endblock %}
 {% block content %}
-<h1>Enrollment: {{ enrollment.course.name }}</h1>
-<p>Date Registered: {{ enrollment.date_registered }}</p>
-<ul>Enrollment Content:
-    {% for content in course_contents %}
-    <li>
-        <h3>{{ content.name }}</h3>
-        <p>{{ content.content }}</p>
-        {% if content.additional_resource_link %}
-            <p><a href="{{ content.additional_resource_link }}">More Info</a></p>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-<ul>Course Comments From Other Students:
-    {% for comment in enrollment.course.comments %}
-        {% if comment.approved %}
-            <li>
-                <p>By: {{ comment.user.username }}</p>
-                <p>{{ comment.content }}</p>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<form method="post" action="">
-    <textarea name="content"></textarea>
-    <input type="hidden" name="parent" value="" />
-    <button type="submit">Submit Comment</button>
-</form>
+<div class="row">
+    <h1 class="col">Enrollment: {{ enrollment.course.name }}</h1>
+</div>
+<div class="row">
+    <div class="col-12 col-md-3">
+        <p>Date Registered: {{ enrollment.date_registered }}</p>
+    </div>
+    <div class="col-12 col-md-9">
+        <div class="row">
+          <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                {% for content in course_contents %}
+                <a class="list-group-item list-group-item-action" id="list-content-{{ content.id }}-item" data-toggle="list" href="#content-{{ content.id }}" role="tab" aria-controls="{{ content.name }}">{{ content.name }}</a>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                {% for content in course_contents %}
+                <div class="tab-pane fade show" id="content-{{ content.id }}" role="tabpanel" aria-labelledby="list-content-{{ content.id }}-item">
+                    <p>{{ content.content }}</p>
+                    {% if content.additional_resource_link %}
+                    <p><a href="{{ content.additional_resource_link }}">More Info</a></p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <ul class="col">Course Comments From Other Students:
+        {% for comment in enrollment.course.comments %}
+            {% if comment.approved %}
+                <li>
+                    <p>By: {{ comment.user.username }}</p>
+                    <p>{{ comment.content }}</p>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+</div>
+<div class="row">
+    <form class="col" method="post" action="">
+        <textarea name="content"></textarea>
+        <input type="hidden" name="parent" value="" />
+        <button type="submit">Submit Comment</button>
+    </form>
+</div>
+
+<!--<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>-->
+
 {% endblock %}

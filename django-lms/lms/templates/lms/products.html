@@ -1,10 +1,54 @@
 {% extends "base.html" %}
 {% block title %}LMS Products{% endblock %}
 {% block content %}
-<h1>Products</h1>
-<ul>
-{% for product in products %}
-    <li><a href="{% url 'product' product.id %}">{{ product.name }}</a></li>
-{% endfor %}
-</ul>
+<div class="row">
+	<h1 class="col">LMS Products</h1>
+</div>
+<div class="row">
+	<table class="col table table-striped table-bordered">
+		<thead class="thead-light">
+			<tr>
+			<th scope="col">#</th>
+			<th scope="col">Thumbnail</th>
+			<th scope="col">Product Name</th>
+			<th scope="col">Price</th>
+			<th scope="col">Product Description</th>
+			<th scope="col">View More</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			{% url 'product' product.id as product_link %}
+			<tr>
+			<th scope="row">{{ product.id }}</th>
+			<td><a href="{{ product_link }}"><img alt="{{ product.name }}" src="http://via.placeholder.com/100x100" /></a></td>
+			<td><a href="{{ product_link }}">{{ product.name }}</a></td>
+			<td>${{ product.price }}</td>
+			<td><p>{{ product.description }}</p></td>
+			<td><a class="btn btn-primary" href="{{ product_link }}">Product Details</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% if paginate %}
+<div class="row">
+	<nav aria-label="product pagination">
+		<ul class="pagination">
+			<li class="page-item disabled">
+				<a class="page-link" href="{% url 'products' previous_page %}" tabindex="-1">Previous</a>
+			</li>
+			{% for i in "x"|ljust:pages %}
+			<li class="page-item active">
+				<a class="page-link" href="{% url 'products' forloop.counter %}">{{ forloop.counter }}
+				</a>
+			</li>
+			{% endfor %}
+			<li class="page-item">
+				<a class="page-link" href="{% url 'products' next_page %}">Next</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+{% endif %}
 {% endblock %}

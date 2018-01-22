@@ -1,7 +1,14 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <h1>Checkout</h1>
+<div class="row">
+    <h1 class="col">Checkout</h1>
+</div>
+<div class="row">
+	<div class="col progress">
+	  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+	</div>
+</div>
+<div class="row">
     <form action="{% url 'charge' %}" method="post">
         <article>
             <label>
@@ -10,4 +17,5 @@
         </article>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}" data-description="{{ charge_description }}" data-amount="{{ cart.cart_total }}" data-locale="auto" data-zip-code="true"></script>
     </form>
+</div>
 {% endblock %}

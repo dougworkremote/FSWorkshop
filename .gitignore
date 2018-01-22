@@ -7,3 +7,5 @@ django-lms/django_lms/settings.py
 django-lms/lms/__init__.py
 django-lms/lms/migrations/
 django-lms/lms/__pycache__/
+java-lms/src/main/resources/application.properties
+.git-old/

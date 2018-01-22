@@ -24,13 +24,17 @@ urlpatterns = [
     path('category/<int:category_id>/', views.category, name='category'),
     path('categories/', views.categories, name='categories'),
     path('courses/', views.courses, name='courses'),
+    path('courses/<int:page>/', views.courses, name='courses'),
     path('course/<int:course_id>/', views.course, name='course'),
     path('products/', views.products, name='products'),
+    path('products/<int:page>/', views.products, name='products'),
     path('product/<int:product_id>/', views.product, name='product'),
+
+    path('search/', views.search, name='search'),
 
     path('enrollments/', views.enrollments, name='enrollments'),
     path('enrollment/<int:enrollment_id>/', views.enrollment, name='enrollment'),
-    path('enrollment/<int:enrollment_id>/content/<int:content_id>/', views.enrollment_content, name='enrollment_content'),
+    # path('enrollment/<int:enrollment_id>/content/<int:content_id>/', views.enrollment_content, name='enrollment_content'),
 
     path('signup/', views.signup, name='signup'),
     path('accounts/', include('django.contrib.auth.urls')),

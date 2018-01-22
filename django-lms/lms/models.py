@@ -43,7 +43,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     cart_total = models.DecimalField(max_digits=7, decimal_places=2)
     products = models.ManyToManyField(Product)
 
@@ -77,4 +77,3 @@ class Order(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)

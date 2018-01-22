@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 {% block title %}{{ category.name }}{% endblock %}
 {% block content %}
-<h1>{{ category.name }}</h1>
-<ul>Courses:
+<div class="row">
+	<h1 class="col">{{ category.name }} Courses</h1>
+</div>
+<div class="row">
     {% for course in courses %}
-        {% url 'course' course.id as course_link %}
-        <li><a href="{{ course_link }}">{{ course.name }}</a></li>
+	<div class="col-3">
+		<div class="card">
+			<img class="card-img-top" src="http://via.placeholder.com/400x400" alt="{{ course.description }}">
+			<div class="card-body">
+				<h5 class="card-title">{{ course.name }}</h5>
+				<p class="card-text">{{ course.description }}</p>
+		        {% url 'course' course.id as course_link %}
+				<a href="{% url 'course' course.id %}" class="btn btn-primary">View {{ course.name }}</a>
+			</div>
+		</div>
+	</div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

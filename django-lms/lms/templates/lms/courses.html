@@ -1,11 +1,56 @@
 {% extends "base.html" %}
 {% block title %}LMS Courses{% endblock %}
 {% block content %}
-<h1>LMS Courses</h1>
-<ul>
-    {% for course in courses %}
-        {% url 'course' course.id as course_link %}
-        <li><a href="{{ course_link }}">{{ course.name }}</a></li>
-    {% endfor %}
-</ul>
+<div class="row">
+	<h1 class="col">LMS Courses</h1>
+</div>
+<div class="row">
+	<table class="col table table-striped table-bordered">
+		<thead class="thead-light">
+			<tr>
+			<th scope="col">#</th>
+			<th scope="col">Thumbnail</th>
+			<th scope="col">Category</th>
+			<th scope="col">Course Name</th>
+			<th scope="col">Course Description</th>
+			<th scope="col">View More</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for course in courses %}
+			{% url 'course' course.id as course_link %}
+			{% url 'category' course.category.id as category_link %}
+			<tr>
+			<th scope="row">{{ course.id }}</th>
+			<td><a href="{{ course_link }}"><img alt="{{ course.name }}" src="http://via.placeholder.com/100x100" /></a></td>
+			<td><a href="{{ category_link }}">{{ course.category.name }}</a></td>
+			<td><a href="{{ course_link }}">{{ course.name }}</a></td>
+			<td><p>{{ course.summary }}</p></td>
+			<td><a class="btn btn-primary" href="{{ course_link }}">Course Details</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% if paginate %}
+<div class="row">
+	<nav aria-label="course pagination">
+		<ul class="pagination">
+			<li class="page-item disabled">
+				<a class="page-link" href="{% url 'courses' previous_page %}" tabindex="-1">Previous</a>
+			</li>
+			{% for i in "x"|ljust:pages %}
+			<li class="page-item active">
+				<a class="page-link" href="{% url 'courses' forloop.counter %}">{{ forloop.counter }}
+				</a>
+			</li>
+			{% endfor %}
+			<li class="page-item">
+				<a class="page-link" href="{% url 'courses' next_page %}">Next</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+{% endif %}
+
 {% endblock %}

@@ -1,13 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Welcome to our LMS!</h1>
-<p>Would you like to look at?</p>
-<ul>
-    <li><a href="{% url 'categories' %}">Categories</a></li>
-    <li><a href="{% url 'courses' %}">Courses</a></li>
-    <li><a href="{% url 'products' %}">Products</a></li>
-</ul>
-
+<div class="row">
+	<h1 class="col">Welcome to our LMS!</h1>
+</div>
+<div class="row">
+	<p class="col">Would you like to look at?</p>
+</div>
+<div class="row">
+	<div class="btn-group col" role="View Options Group" aria-label="Content Options">
+		<a class="btn btn-outline-secondary" href="{% url 'categories' %}">Categories</a>
+		<a class="btn btn-outline-secondary" href="{% url 'courses' %}">Courses
+			{% if any_new_courses %}
+			<span class="badge badge-secondary">New</span>
+			{% endif %}
+		</a>
+		<a class="btn btn-outline-secondary" href="{% url 'products' %}">Products
+			{% if any_new_products %}
+			<span class="badge badge-secondary">New</span>
+			{% endif %}
+		</a>
+	</div>
+</div>
 {% endblock %}

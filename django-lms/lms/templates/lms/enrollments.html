@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Your Enrollments{% endblock %}
 {% block content %}
-<h1>Your Enrollments</h1>
-<ul>
-{% for enrollment in enrollments %}
-    <li><a href="{% url 'enrollment' enrollment.id %}">{{ enrollment.course.name }}</a></li>
-{% endfor %}
-</ul>
+<div class="row">
+	<h1 class="col">Your Enrollments</h1>
+</div>
+<div class="row">
+	{% for enrollment in enrollments %}
+	<div class="col-3">
+		<div class="card">
+			<img class="card-img-top" src="http://via.placeholder.com/400x400" alt="{{ enrollment.course.description }}">
+			<div class="card-body">
+				<h5 class="card-title">{{ enrollment.course.name }}</h5>
+				<p class="card-text">{{ enrollment.course.description }}</p>
+				<a href="{% url 'enrollment' enrollment.id %}" class="btn btn-primary">View {{ enrollment.course.name }}</a>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
 {% endblock %}
